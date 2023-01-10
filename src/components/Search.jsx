@@ -8,10 +8,11 @@ function Search() {
 
     const [input, setInput] = useState("");
     const navigate = useNavigate();
-
+    const baseUrl = 'http://localhost:3001/recipes/searched/';
+   
     const submitHandler = (e) => {
         e.preventDefault();
-        navigate(`/searched/` + input);
+        navigate( baseUrl + input);
         
     };
 

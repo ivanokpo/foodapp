@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 const Veggie = () => {
 
     const [veggie, setVeggie]= useState([]);
+    const baseUrl = 'http://localhost:3001/recipes'
 
     useEffect(() => {
         getVeggie();
@@ -21,8 +22,8 @@ const Veggie = () => {
             setVeggie(JSON.parse(check));
         } else {
             
-        
-        const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=12&tags=vegetarian`);
+        const api = await fetch(`${baseUrl}/all`);
+        // const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=12&tags=vegetarian`);
         const data = await api.json();
 
         localStorage.setItem('veggie', JSON.stringify(data.recipes));
