@@ -6,6 +6,7 @@ import Search from "./components/Search";
 import styled from "styled-components";
 import {Link} from 'react-router-dom';
 import {GiKnifeFork} from "react-icons/gi"
+import AddRecipe from "./components/AddRecipe"
 
 function App() {
   return (
@@ -15,8 +16,14 @@ function App() {
         <GiKnifeFork />
         <Logo to={"/"}>Culinery devours</Logo>
       </Nav>
-      <Search/>
+      <div class="grid-container">
+        
+      <div class="grid-item"><Search/></div>
+     
+      
+      </div>
       <Category/>
+      <div class="grid-item"><AddRecipe/></div>
       <Pages/>
       </BrowserRouter>
     </div>
@@ -29,7 +36,12 @@ const Logo = styled(Link)`
   font-weight: 400;
   font-family: 'Lobster Two', cursive;
 `
-
+const List = styled.div`
+    display: flex;
+    flex-direction: reverse;
+    justify-content: space-a;
+    margin: 0rem 0rem;
+`
 const Nav = styled.div`
   padding: 4rem 0rem;
   display: flex;

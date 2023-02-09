@@ -1,7 +1,7 @@
 import React from "react";
 import Home from "./Home";
 import {Route, Routes, BrowserRouter, useLocation} from 'react-router-dom'
-import Cuisine from "./Cuisine";
+import DishType from "./DishType";
 import Searched from "./Searched";
 import Recipe from "./Recipe";
 import { AnimatePresence } from "framer-motion";
@@ -12,9 +12,9 @@ const Pages = () => {
     <AnimatePresence exitBeforeEnter>  
     <Routes Location={location} key={location.pathname}>
         <Route path="/" element={<Home/>}/>
-        <Route path="/cuisine/:type" element={<Cuisine/>}/>
-        <Route path="/searched/:search" element={<Searched/>}/>
-        <Route path='/recipes/:id' element={<Recipe/>}/>
+        <Route path="/category/:type" element={<DishType/>}/>
+        <Route path="/recipes/searched/:search" element={<Searched/>}/>
+        <Route path="/recipes/:id" element={<Recipe/>}/>
     </Routes>
     </AnimatePresence>
     

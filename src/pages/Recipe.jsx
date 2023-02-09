@@ -22,11 +22,6 @@ function Recipe() {
   console.log(details)
 
   useEffect( () => {
-    
-    
-   
-    
-
     fetchDetails();
   }, [params.id])
 
@@ -40,27 +35,28 @@ function Recipe() {
       <DetailWrapper>
       <div>
       <h2>{details.title}</h2>
-      {/* <img src={details.image} alt=""/> */}
+      <img src={details.image} alt="" width="400" 
+     height="auto"/>
       </div>
-      {/* <Info>
+      <Info>
         <Button className={activeTab === "instructions" ? "active" : ""} onClick={()=> setActiveTab("instructions")}>Instructions</Button>
         <Button className={activeTab === "ingredients" ? "active" : ""} onClick={()=> setActiveTab("ingredients")}>Ingredients</Button>
         {activeTab === "instructions" && (
           <div>
-          <h3 dangerouslySetInnerHTML={{__html: details.summary}}></h3>
+          <h3 dangerouslySetInnerHTML={{__html: details.instructions}}></h3>
           <h3 dangerouslySetInnerHTML={{__html: details.instructions}}></h3>
 
         </div>
         ) }
         {activeTab === "ingredients" && (
           <ul>
-          {details.extendedIngredients.map((ingredient) => 
-            <li key={ingredient.id}>{ingredient.original}</li>
+          {details.ingredients.map((ingredient) => 
+            <li >{ingredient}</li>
           )}
         </ul>
         )}
         
-      </Info> */}
+      </Info>
     </DetailWrapper>
  
     

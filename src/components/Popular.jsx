@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import {Splide, SplideSlide} from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide.min.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams, useNavigate} from 'react-router-dom';
+import {RxCross2} from 'react-icons/rx';
 
 const Popular = () => {
 
     const [popular, setPopular]= useState([]);
-    const baseUrl = 'http://localhost:3001/recipes'
-
+    const baseUrl = 'http://localhost:3001/recipes';
+    const navigate = useNavigate();
 
     useEffect(() => {
         getPopular();
@@ -17,10 +18,10 @@ const Popular = () => {
 
     const getPopular = async () => {
 
-        const check = localStorage.getItem('popular');
-        if (check){
-            setPopular(JSON.parse(check));
-        } else {
+        // const check = localStorage.getItem('popular');
+        // if (check){
+        //     setPopular(JSON.parse(check));
+        // } else {
             
         
         const api = await fetch(`${baseUrl}/all`);
@@ -30,15 +31,25 @@ const Popular = () => {
         localStorage.setItem('popular', JSON.stringify(data));
         console.log(data)
         setPopular(data)
-        }
+        //}
+    }
+
+    const handleDelete = async (id) => {
+        console.log("delete");
+        const url = `${baseUrl}/delete/${id}`
+        const fetchDelete = fetch(url, {method: 'DELETE'}).then((response) => {
+            if(!response.ok){
+                throw new Error('Something went wrong')
+            }
+            
+            // assume things went well ^ 
+        }).catch((e) => {console.log(e)});
     }
 
   return (
     <div>
-        
-            
                 <Wrapper >
-                    <h3>Popular Picks</h3>
+                    <h3>Chef's Picks</h3>
 
                     <Splide options={{
                         perPage: 4,
@@ -47,15 +58,23 @@ const Popular = () => {
                         drag: 'free',
                         gap: '5rem'
                     }}>
-                    {popular.map(recipe => {
+                    {popular.map((recipe) => {
                         return(
                             <SplideSlide key={recipe.id}>
+                            <DeleteButton onClick={(e) => handleDelete(recipe.id)}>
+                            <RxCross2/>
+                            </DeleteButton>
                             <Card key={recipe.id}> 
+                            
+                            <p key={recipe.id}>{recipe.title}</p>
+                            
+                            <img src={recipe.image}  alt={recipe.title} width="200" height="auto"/>
                             <Link to={'/recipes/' + recipe.id}>
-                                <p key={recipe.id}>{recipe.title}</p>
-                                {/* <img src={recipe.image} alt={recipe.title} ></img> */}
+                                
                                 <Gradient/> 
                             </Link>
+                         
+                            
                             </Card>
                             </SplideSlide>
                         )
@@ -69,6 +88,13 @@ const Popular = () => {
 }
 
 const Wrapper = styled.div`margin: 4rem 0rem`
+
+const DeleteButton = styled.button`
+
+    margin: 1rem 0rem;
+    
+    
+    `
     
 const Card = styled.div`
     min-height: 25rem;

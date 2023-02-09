@@ -8,7 +8,7 @@ function Search() {
 
     const [input, setInput] = useState("");
     const navigate = useNavigate();
-    const baseUrl = 'http://localhost:3001/recipes/searched/';
+    const baseUrl = '/recipes/searched/';
    
     const submitHandler = (e) => {
         e.preventDefault();
@@ -25,19 +25,20 @@ function Search() {
             value={input}
             />
         </div>
-            <h1>{input}</h1>
+            
     </FormStyle>
   )
 }
 
 const FormStyle = styled.form`
-    margin: 0rem 20rem;
-    position: relative;
-    width: 100%;
-
+    margin: 0rem 0rem;
+    position: absolute;
+    width: 60%;
+    justify-content: center;
     div {
         width: 100%;
-        position: relative;
+        position: absolute;
+        top: 50%;
     }
 
     input {
@@ -50,6 +51,7 @@ const FormStyle = styled.form`
         border-radius: 1rem;
         outline: none;
         width: 100%;
+        
     }
 
     svg {

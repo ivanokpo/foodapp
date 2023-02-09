@@ -8,10 +8,11 @@ function Searched() {
     const [searchedRecipes, setSearchedRecipes] = useState([]);
     let params = useParams();
 
-    const getSearched = async (name) => {
-        const data = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&number=12&query=${name}`)
+    const getSearched = async () => {
+        const data = await fetch(`http://localhost:3001/recipes/searched/${params.search}`)
         const recipes = await data.json();
-        setSearchedRecipes(recipes.results);
+        setSearchedRecipes(recipes);
+        console.log(recipes);
     }
 
     useEffect(() => {
@@ -23,9 +24,11 @@ function Searched() {
         {searchedRecipes.map((item) => {
             return(
                 <Card key={item.id}>
-                    <Link to={'/recipe/' + item.id}>
-                    <img src={item.image} alt=""/>
+                    <Link to={'/recipes/'+ item.id}>
+                    <img src={item.image} alt="" width="200" 
+     height="auto"/>
                     <h4>{item.title}</h4>
+                    {/* <p key={item.ingredients.id}>{item.ingredients}</p> */}
                     </Link>
                 </Card>
             )
@@ -43,7 +46,7 @@ const Grid = styled.div`
 const Card = styled.div`
 
     img {
-        width: 100%;
+        width: 40%;
         border-radius: 2rem;
     }
 
