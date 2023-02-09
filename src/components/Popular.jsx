@@ -41,7 +41,7 @@ const Popular = () => {
             if(!response.ok){
                 throw new Error('Something went wrong')
             }
-            
+            navigate('/')
             // assume things went well ^ 
         }).catch((e) => {console.log(e)});
     }
