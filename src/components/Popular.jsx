@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 const Popular = () => {
 
     const [popular, setPopular]= useState([]);
+    const baseUrl = 'http://localhost:3001/recipes'
+
 
     useEffect(() => {
         getPopular();
@@ -21,12 +23,13 @@ const Popular = () => {
         } else {
             
         
-        const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=12`);
+        const api = await fetch(`${baseUrl}/all`);
+        
         const data = await api.json();
 
-        localStorage.setItem('popular', JSON.stringify(data.recipes));
-        console.log(data.recipes)
-        setPopular(data.recipes)
+        localStorage.setItem('popular', JSON.stringify(data));
+        console.log(data)
+        setPopular(data)
         }
     }
 
@@ -48,9 +51,9 @@ const Popular = () => {
                         return(
                             <SplideSlide key={recipe.id}>
                             <Card key={recipe.id}> 
-                            <Link to={'/recipe/' + recipe.id}>
+                            <Link to={'/recipes/' + recipe.id}>
                                 <p key={recipe.id}>{recipe.title}</p>
-                                <img src={recipe.image} alt={recipe.title} ></img>
+                                {/* <img src={recipe.image} alt={recipe.title} ></img> */}
                                 <Gradient/> 
                             </Link>
                             </Card>
